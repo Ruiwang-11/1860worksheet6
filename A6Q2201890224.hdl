@@ -1,0 +1,41 @@
+CHIP A6Q2201890224 {
+    IN a, b, c, d;
+    OUT f;
+
+    PARTS:
+    
+    Not(in=a, out=na);
+    Not(in=b, out=nb);
+    Not(in=c, out=nc);
+    Not(in=d, out=nd);
+
+    And(a=na, b=nb, out=and1);
+    And(a=and1, b=nc, out=and2);
+    And(a=and2, b=nd, out=term1);
+
+    And(a=na, b=nb, out=and3);
+    And(a=and3, b=c, out=and4);
+    And(a=and4, b=nd, out=term2);
+
+    And(a=na, b=nb, out=and5);
+    And(a=and5, b=c, out=and6);
+    And(a=and6, b=d, out=term3);
+
+    And(a=a, b=nb, out=and7);
+    And(a=and7, b=nc, out=and8);
+    And(a=and8, b=nd, out=term4);
+
+    And(a=a, b=nb, out=and9);
+    And(a=and9, b=nc, out=and10);
+    And(a=and10, b=d, out=term5);
+
+    And(a=a, b=b, out=and11);
+    And(a=and11, b=c, out=and12);
+    And(a=and12, b=d, out=term6);
+
+    Or(a=term1, b=term2, out=partial1);
+    Or(a=partial1, b=term3, out=partial2);
+    Or(a=partial2, b=term4, out=partial3);
+    Or(a=partial3, b=term5, out=partial4);
+    Or(a=partial4, b=term6, out=f);
+}
